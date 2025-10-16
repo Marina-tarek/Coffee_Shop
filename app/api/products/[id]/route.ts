@@ -1,24 +1,52 @@
 import { NextResponse } from "next/server";
 import Product from "@/models/Product";
-import { connectDB } from "@/lib/mongodb";
+import {connectDB}from "@/lib/mongodb";
 
-export async function GET(_: Request, { params }: { params: { id: string } }) {
+export async function GET(
+  req: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params;
+
   await connectDB();
-  const product = await Product.findById(params.id);
-  if (!product)
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  const product = await Product.findById(id);
+
+  if (!product) {
+    return NextResponse.json({ message: "Product not found" }, { status: 404 });
+  }
+
   return NextResponse.json(product);
 }
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
-  await connectDB();
+export async function PUT(
+  req: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params; // ← هنا التعديل المهم
   const body = await req.json();
-  const updated = await Product.findByIdAndUpdate(params.id, body, { new: true });
+
+  await connectDB();
+  const updated = await Product.findByIdAndUpdate(id, body, { new: true });
+
+  if (!updated) {
+    return NextResponse.json({ message: "Product not found" }, { status: 404 });
+  }
+
   return NextResponse.json(updated);
 }
 
-export async function DELETE(_: Request, { params }: { params: { id: string } }) {
+export async function DELETE(
+  req: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params;
+
   await connectDB();
-  await Product.findByIdAndDelete(params.id);
+  const deleted = await Product.findByIdAndDelete(id);
+
+  if (!deleted) {
+    return NextResponse.json({ message: "Product not found" }, { status: 404 });
+  }
+
   return NextResponse.json({ message: "Deleted successfully" });
 }
