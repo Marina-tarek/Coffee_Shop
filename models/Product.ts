@@ -11,3 +11,4 @@ const productSchema = new Schema({
 });
 
 export default models.Product || model("Product", productSchema);
+

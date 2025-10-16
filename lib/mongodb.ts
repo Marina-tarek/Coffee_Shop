@@ -1,21 +1,46 @@
+// import mongoose from "mongoose";
+
+// const MONGODB_URI = process.env.MONGODB_URI!;
+// if (!MONGODB_URI) {
+//   throw new Error("Please define MONGODB_URI in .env.local");
+// }
+
+// // Prevent multiple connections in dev
+// let cached = (global as any).mongoose || { conn: null, promise: null };
+
+// export async function connectDB() {
+//   if (cached.conn) return cached.conn;
+
+//   if (!cached.promise) {
+//     cached.promise = mongoose.connect(MONGODB_URI).then((m) => m);
+//   }
+
+//   cached.conn = await cached.promise;
+//   (global as any).mongoose = cached;
+//   return cached.conn;
+// }
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI!;
-if (!MONGODB_URI) {
-  throw new Error("Please define MONGODB_URI in .env.local");
+// خليه ثابت عادي بدون as string
+const uri = process.env.MONGODB_URI!;
+
+if (!uri) {
+  throw new Error("❌ Please define the MONGODB_URI in .env.local");
 }
 
-// Prevent multiple connections in dev
 let cached = (global as any).mongoose || { conn: null, promise: null };
 
 export async function connectDB() {
   if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI).then((m) => m);
+    cached.promise = mongoose.connect(uri, {
+      dbName: "coffee_shop_db", // اسم قاعدة البيانات (اختياري)
+    }).then((mongoose) => mongoose);
   }
 
   cached.conn = await cached.promise;
   (global as any).mongoose = cached;
+
   return cached.conn;
 }
