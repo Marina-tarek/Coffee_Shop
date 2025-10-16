@@ -3,14 +3,6 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="relative flex flex-col items-center justify-center min-h-screen text-center text-white">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/coffee_bean.png')" }}
-      >
-
-      </div>
-
-      <div className="absolute inset-0 bg-black/80"></div>
       <div className="relative z-10 flex flex-col items-center">
         <h1 className="text-5xl font-bold mb-6 drop-shadow-lg">
           ☕ Welcome to Coffee Haven ☕
