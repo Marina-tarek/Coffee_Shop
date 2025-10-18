@@ -11,7 +11,7 @@ export default function Home() {
           href="/products"
           className="bg-amber-700 hover:bg-amber-800 transition text-white px-6 py-3 rounded-lg text-lg font-semibold shadow-md"
         >
-          Browse Our Coffee
+          Browse Our Items
         </Link>
       </div>
     </main>
