@@ -5,7 +5,7 @@ export default function Home() {
     <main className="relative flex flex-col items-center justify-center min-h-screen text-center text-white">
       <div className="relative z-10 flex flex-col items-center">
         <h1 className="text-5xl font-bold mb-6 drop-shadow-lg">
-          ☕ Welcome to Coffee Haven ☕
+          ☕ Welcome to Brew Haven ☕
         </h1>
         <Link
           href="/products"

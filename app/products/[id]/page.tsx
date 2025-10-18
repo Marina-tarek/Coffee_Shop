@@ -13,9 +13,9 @@ async function getProduct(id: string) {
 export default async function ProductDetails({
   params,
 }: {
-  params: Promise<{ id: string }>; // 👈 لازم تكون Promise
+  params:{ id: string }; 
 }) {
-  const { id } = await params; // 👈 نعمل await للـ params
+  const { id } = params; 
   const product = await getProduct(id);
 
   return (
