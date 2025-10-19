@@ -19,7 +19,8 @@ export default async function ProductDetails({
   const product = await getProduct(id);
 
   return (
-    <div className="relative min-h-screen text-white">
+<section >
+      <div className="relative min-h-screen text-white py-18">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/coffee_bean.png')" }}
@@ -37,5 +38,6 @@ export default async function ProductDetails({
         <p className="text-2xl font-semibold text-amber-500">{product.price} EGP</p>
       </div>
     </div>
+</section>
   );
 }
